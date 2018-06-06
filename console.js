@@ -5,13 +5,13 @@ var consoleDebug = {
   init: function (){
     var t = this;
     if(location.href.indexOf('consoledebug')>=0){
+      this.appendStyle();
+
       window.onload = function(){
+        t.createElement();
         t.bind()
+        t.rewrite();
       };
-      var style = document.createElement('style');
-      style.type = 'text/css';
-      style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;right:0;left:0;overflow:hidden;background:#000;opacity:.7;z-index:99999;color:#fff}.debuggerWrap p{padding:0;margin:0;word-break:break-all}.debuggerWrap .debuggerWrap-head{text-align:right}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;height:260px;overflow-y:auto;font-size:14px}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
-      document.getElementsByTagName('HEAD').item(0).appendChild(style);
     }
   },
   bind: function (){
@@ -25,8 +25,8 @@ var consoleDebug = {
     document.querySelector('.debugger-clear').addEventListener('click', function(){
       document.querySelector('.debuggerWrap-content').innerHTML = '';
     })
-    this.rewrite()
   },
+
   rewrite: function(){
     var t = this;
     var log = console.log;
@@ -54,6 +54,41 @@ var consoleDebug = {
     var $content = document.querySelector('.debuggerWrap-content');
     $content.append(P);
     $content.scrollTop = $content.scrollHeight;
+  },
+  //插入样式
+  appendStyle: function(){
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;right:0;left:0;overflow:hidden;z-index:99999;color:#fff}.debuggerWrap p{padding:0;margin:0;word-break:break-all}.debuggerWrap .debuggerWrap-head{text-align:right;position:relative}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;height:260px;overflow-y:auto;font-size:14px;position:relative}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
+    document.getElementsByTagName('HEAD').item(0).appendChild(style);
+  },
+  //生成dom对象
+  createElement: function(){
+    var $Wrap = document.createElement('div');
+    $Wrap.className = 'debuggerWrap';
+
+    var $head = document.createElement('div');
+    $head.className = 'debuggerWrap-head';
+    var $hide = document.createElement('span');
+    $hide.className = 'debugger-hide';
+    $hide.innerHTML = '收起';
+    var $show = document.createElement('span');
+    $show.className = 'debugger-show';
+    $show.innerHTML = '显示';
+    var $clear = document.createElement('span');
+    $clear.className = 'debugger-clear';
+    $clear.innerHTML = '清除';
+    $head.appendChild($hide);
+    $head.appendChild($show);
+    $head.appendChild($clear);
+
+    var $content = document.createElement('div');
+    $content.className = 'debuggerWrap-content';
+
+    $Wrap.append($head);
+    $Wrap.append($content);
+
+    document.getElementsByTagName('Body').item(0).appendChild($Wrap);
   }
 }
 consoleDebug.init();
