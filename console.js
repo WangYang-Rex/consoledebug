@@ -59,7 +59,7 @@ var consoleDebug = {
   appendStyle: function(){
     var style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;right:0;left:0;overflow:hidden;z-index:99999;color:#fff}.debuggerWrap p{padding:0;margin:0;word-break:break-all}.debuggerWrap .debuggerWrap-head{text-align:right;position:relative}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;height:260px;overflow-y:auto;font-size:14px;position:relative}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
+    style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;right:0;left:0;overflow:hidden;z-index:99999;color:#fff;background:#000;opacity:.7}.debuggerWrap p{padding:0;margin:0;word-break:break-all;line-height:1.2}.debuggerWrap .debuggerWrap-head{text-align:right;position:relative}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;min-height:300px;overflow-y:auto;position:relative}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
     document.getElementsByTagName('HEAD').item(0).appendChild(style);
   },
   //生成dom对象
@@ -84,6 +84,7 @@ var consoleDebug = {
 
     var $content = document.createElement('div');
     $content.className = 'debuggerWrap-content';
+    $content.style.height = document.getElementsByTagName('html').item(0).clientHeight * .4 + 'px'
 
     $Wrap.append($head);
     $Wrap.append($content);
@@ -91,7 +92,12 @@ var consoleDebug = {
     document.getElementsByTagName('Body').item(0).appendChild($Wrap);
   }
 }
-consoleDebug.init();
+try {
+  consoleDebug.init();
+} catch(e){
+
+}
+
 // window.onload = function(){
 //   consoleDebug.init();
 // }
