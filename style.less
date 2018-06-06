@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.debuggerWrap {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  background: #000000;
+  opacity: 0.7;
+  z-index: 99999;
+  color: #fff;
+
+  p{
+    padding: 0;
+    margin: 0;
+    word-break: break-all;
+  }
+
+  .debuggerWrap-head {
+    text-align: right;
+    span {
+      margin-right: 14px;
+    }
+  }
+  .debuggerWrap-content{
+    padding: 10px;
+    height: 260px;
+    overflow-y: auto;
+    font-size: 14px;
+
+    .console-title{
+      margin-right: 10px;
+    }
+    .console-log{
+      color: #fff;
+
+      .console-title{
+        color: #02a5fd;
+      }
+    }
+    .console-error{
+      color: red;
+    }
+  }
+}
