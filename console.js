@@ -10,7 +10,7 @@ var consoleDebug = {
       };
       var style = document.createElement('style');
       style.type = 'text/css';
-      style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;overflow:hidden;background:#000;opacity:.7;z-index:99999;color:#fff}.debuggerWrap p{padding:0;margin:0;word-break:break-all}.debuggerWrap .debuggerWrap-head{text-align:right}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;height:260px;overflow-y:auto;font-size:14px}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
+      style.innerHTML="body{margin:0;padding:0}.debuggerWrap{position:fixed;top:0;right:0;left:0;overflow:hidden;background:#000;opacity:.7;z-index:99999;color:#fff}.debuggerWrap p{padding:0;margin:0;word-break:break-all}.debuggerWrap .debuggerWrap-head{text-align:right}.debuggerWrap .debuggerWrap-head span{margin-right:14px}.debuggerWrap .debuggerWrap-content{padding:10px;height:260px;overflow-y:auto;font-size:14px}.debuggerWrap .debuggerWrap-content .console-title{margin-right:10px}.debuggerWrap .debuggerWrap-content .console-log{color:#fff}.debuggerWrap .debuggerWrap-content .console-log .console-title{color:#02a5fd}.debuggerWrap .debuggerWrap-content .console-error{color:#f00}";
       document.getElementsByTagName('HEAD').item(0).appendChild(style);
     }
   },
@@ -50,7 +50,7 @@ var consoleDebug = {
   log: function(text, type){
     var P = document.createElement('P');
     P.className = type == 'log' ? 'console-log' : 'console-error';
-    P.innerHTML = (type == 'log' ? '[log] ' : '[error] ') + new Date().toLocaleTimeString() + ' ' + text;
+    P.innerHTML = new Date().toLocaleTimeString() +(type == 'log' ? ' [log] ' : ' [error] ') + text;
     var $content = document.querySelector('.debuggerWrap-content');
     $content.append(P);
     $content.scrollTop = $content.scrollHeight;
